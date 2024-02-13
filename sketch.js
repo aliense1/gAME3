@@ -2,7 +2,9 @@ var bg_img, splash_img;
 var player_img, player;
 var playButton, infoButton;
 var enemy,enemy_group;
-var enemy1_img, enemy2_img, enemy3_img;
+var enemy1_img, enemy2_img, enemy3_img,bg2_img;
+var enemy_lvl2, enemy_lv2grp;
+var enemy_2_1, enemy_2_2;
 var gameState = "wait";
 var bullet_group, bullet_img,bullet
 var health = 200, max_health=200;
@@ -19,7 +21,11 @@ function preload(){
     enemy2_img = loadImage("./assets/ufo.png")
     enemy3_img = loadImage("./assets/asteroid.png")
     bullet_img = loadImage("./assets/bullet.png")
+    
     bg2_img  = loadImage("./assets/bg2.jpg")
+
+    enemy_2_1 = loadImage("../assets/enemy_2_1.png")
+    enemy_2_2 = loadImage("../assets/enemy_2_2.png")
 }
 
 function setup() {
@@ -120,12 +126,14 @@ function draw(){
 
     if(gameState == "level2"){
         background(bg2_img);
-        
+        player.visible = true;
         player.x = width/10
         player.y = windowHeight-90;
-        player.visible = true;
         movement();
-        spawnBullets();
+        health_level();
+        if(keyDown(32)){
+            spawnBullets();
+        }
         
         
 
@@ -175,6 +183,7 @@ function aboutFunct(){
 
 function movement(){
 
+    
     if(player.y<20){
         player.y = 20
     }
@@ -184,13 +193,15 @@ function movement(){
     }
  
 
-    if(keyIsDown(UP_ARROW)){
-        player.velocityY = -10;
+    if(keyDown("UP_ARROW")){
+        console.log("up arrow pressed");
+        player.y -= 10;
     }
     
 
-    if (keyIsDown(DOWN_ARROW)){
-        player.velocityY = 10;
+    if (keyDown("DOWN_ARROW")){
+        console.log("down arrow pressed");
+        player.y += 10;
     }
 }
 
