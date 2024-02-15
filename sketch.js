@@ -3,8 +3,8 @@ var player_img, player;
 var playButton, infoButton;
 var enemy,enemy_group;
 var enemy1_img, enemy2_img, enemy3_img,bg2_img;
-var enemy_lvl2, enemy_lv2grp;
-var enemy_2_1, enemy_2_2;
+var enemy_lvl2, enemy_group2;
+var enemy_2_1, enemy_2_2,enemy2;
 var gameState = "wait";
 var bullet_group, bullet_img,bullet
 var health = 200, max_health=200;
@@ -24,8 +24,8 @@ function preload(){
     
     bg2_img  = loadImage("./assets/bg2.jpg")
 
-    enemy_2_1 = loadImage("../assets/enemy_2_1.png")
-    enemy_2_2 = loadImage("../assets/enemy_2_2.png")
+    enemy_2_1 = loadImage("./assets/enemy_2_1.png")
+    enemy_2_2 = loadImage("./assets/enemy_2_2.png")
 }
 
 function setup() {
@@ -48,6 +48,7 @@ function setup() {
 
     enemy_group = new Group();
     bullet_group = new Group();
+    enemy_group2 = new Group();
 
     
 }
@@ -131,7 +132,8 @@ function draw(){
         player.y = windowHeight-90;
         movement();
         health_level();
-        if(keyDown(32)){
+        spawnEnemies2();
+        if(keyIsDown(32)){
             spawnBullets();
         }
         
@@ -298,4 +300,37 @@ function gameEnd(){
       function(){
         gameState = "wait";
       })
+}
+
+function spawnEnemies2(){
+    if (frameCount%60==0){
+        var random = Math.round((Math.random()*2)+1);
+        
+
+        var randomHeight = Math.round(Math.random()*windowHeight);
+        
+
+
+        enemy2 = createSprite(width-10,randomHeight);
+        switch(random){
+            case 1:
+                enemy.addImage(enemy_2_1);
+                enemy.scale = 1.3;
+                enemy.velocityX = -5;
+                break;
+
+            case 2:
+                enemy.addImage(enemy_2_2);
+                enemy.scale = 1.3;
+                enemy.velocityX = -5;
+                break;
+
+            default:
+                break;
+
+            
+        }
+
+        enemy_group2.add(enemy2);
+    }
 }
