@@ -195,13 +195,13 @@ function movement(){
 
     if(keyDown("UP_ARROW")){
         console.log("up arrow pressed");
-        player.y -= 10;
+        player.y -= 25;
     }
     
 
     if (keyDown("DOWN_ARROW")){
         console.log("down arrow pressed");
-        player.y += 10;
+        player.y += 25;
     }
 }
 
